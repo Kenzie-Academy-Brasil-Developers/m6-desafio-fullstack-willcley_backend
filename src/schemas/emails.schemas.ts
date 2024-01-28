@@ -7,14 +7,12 @@ export const emailSchema = z.object({
     clientId: z.string(),
 });
 
-export const createEmailSchema = emailSchema.omit({
-    id: true,
-});
-export const readEmailSchema = emailSchema.array();
-export const updateEmailSchema = emailSchema.partial();
-export const returnEmailSchema = emailSchema.omit({
-    password: true,
-});
+export const returnEmailSchema = emailSchema.omit({ password: true });
+
+export const createEmailSchema = emailSchema.omit({ id: true });
+export const readEmailSchema = returnEmailSchema.array();
+export const updateEmailSchema = emailSchema.pick({ password: true });
+
 export const loginSchema = emailSchema.pick({
     email: true,
     password: true,

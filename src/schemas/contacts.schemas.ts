@@ -13,5 +13,6 @@ export const createContactSchema = contactSchema.omit({
     id: true,
     createdAt: true,
 });
-export const readContactSchema = contactSchema.array();
-export const updateContactSchema = contactSchema.partial();
+export const updateContactSchema = createContactSchema.omit({
+    clientId: true,
+});

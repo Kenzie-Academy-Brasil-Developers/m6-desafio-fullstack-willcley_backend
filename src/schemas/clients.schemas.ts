@@ -11,5 +11,3 @@ export const createClientSchema = clientSchema.omit({
     id: true,
     createdAt: true,
 });
-export const readClientSchema = clientSchema.array();
-export const updateClientSchema = clientSchema.partial();
