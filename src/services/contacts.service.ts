@@ -12,14 +12,6 @@ export const createContactService = async (data: TCreateContact): Promise<Contac
     return await contactRepo.save({...data, emails, phones});
 };
 
-export const getContactService = async (id: string): Promise<Contact> => {
-    const contact: Contact | null = await contactRepo.findOneBy({ id });
-
-    if (!contact) throw new AppError("Contact not found.", 404);
-
-    return contact;
-};
-
 export const readContactService = async (): Promise<Contact[]> => {
     return await contactRepo.find();
 };

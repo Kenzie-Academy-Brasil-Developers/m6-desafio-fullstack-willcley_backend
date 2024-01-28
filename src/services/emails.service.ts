@@ -9,7 +9,6 @@ import {
 import {
     returnEmailSchema,
     readEmailSchema,
-    updateEmailSchema,
 } from "../schemas/emails.schemas";
 import { clientRepo, emailRepo } from "../repositories";
 import { hash } from "bcryptjs";
@@ -28,16 +27,6 @@ export const createEmailService = async (
     });
 
     return returnEmailSchema.parse(emailCreated);
-};
-
-export const getEmailService = async (
-    id: string
-): Promise<TReturnEmail> => {
-    const email: Email | null = await emailRepo.findOneBy({ id });
-
-    if (!email) throw new AppError("Email not found.", 404);
-
-    return returnEmailSchema.parse(email);
 };
 
 export const readEmailService = async (): Promise<TReadEmail> => {

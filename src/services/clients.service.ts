@@ -11,17 +11,6 @@ export const createClientService = async (data: TCreateClient): Promise<Client> 
     return await clientRepo.save({...data, phones});
 };
 
-export const getClientService = async (id: string): Promise<Client> => {
-    const client: Client | null = await clientRepo.findOne({
-        where: { id },
-        relations: { emails: true, contacts: true },
-    });
-
-    if (!client) throw new AppError("Client not found.", 404);
-
-    return client;
-};
-
 export const readClientService = async (): Promise<Client[]> => {
     return await clientRepo.find({
         relations: { emails: true, contacts: true },
