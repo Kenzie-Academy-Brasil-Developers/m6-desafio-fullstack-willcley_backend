@@ -4,7 +4,7 @@ export const contactSchema = z.object({
     id: z.string(),
     fullname: z.string().max(50),
     createdAt: z.string(),
-    emails: z.string(),
+    emails: z.string().array(),
     phones: z.string(),
     clientId: z.string(),
 });
@@ -15,4 +15,4 @@ export const createContactSchema = contactSchema.omit({
 });
 export const updateContactSchema = createContactSchema.omit({
     clientId: true,
-});
+}).partial();

@@ -4,7 +4,10 @@ export const emailSchema = z.object({
     id: z.string(),
     email: z.string().email().max(50),
     password: z.string().max(120),
-    clientId: z.string(),
+    client: z.object({
+        id: z.string(),
+        fullname: z.string(),
+    }),
 });
 
 export const returnEmailSchema = emailSchema.omit({ password: true });
