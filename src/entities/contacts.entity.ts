@@ -24,6 +24,8 @@ export default class Contact {
     @Column({ type: "json" })
     phones: JSON;
 
-    @ManyToOne(() => Client, (client) => client.contacts)
+    @ManyToOne(() => Client, (client) => client.contacts, {
+        onDelete: "CASCADE",
+    })
     client: Client;
 };
