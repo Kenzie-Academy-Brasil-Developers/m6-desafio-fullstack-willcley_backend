@@ -1,19 +1,26 @@
 import AppError from "../errors/AppErrors.error";
-import { Contact } from "../entities/index";
+import { Client, Contact } from "../entities/index";
 import {
     TCreateContact,
     TUpdateContact,
 } from "../interfaces/contacts.interfaces";
-import { contactRepo } from "../repositories";
+import { clientRepo, contactRepo } from "../repositories";
 
 export const createContactService = async (data: TCreateContact): Promise<Contact> => {
-    const emails: JSON = JSON.parse(data.emails);
+    const { fullname, clientId } = data;
+    const emailsStringJSON: string = JSON.stringify(data.emails);
+    const emails: JSON = JSON.parse(emailsStringJSON);
     const phones: JSON = JSON.parse(data.phones);
-    return await contactRepo.save({...data, emails, phones});
-};
 
-export const readContactService = async (): Promise<Contact[]> => {
-    return await contactRepo.find();
+    const client: Client | null = await clientRepo.findOneBy({ id: clientId });
+    if (!client) throw new AppError("Client not found.", 404);
+
+    return await contactRepo.save({
+        fullname,
+        emails,
+        phones,
+        client: client,
+    });
 };
 
 export const updateContactService = async (
@@ -22,7 +29,10 @@ export const updateContactService = async (
 ): Promise<Contact> => {
     let emails: JSON = contact.emails;
     let phones: JSON = contact.phones;
-    if (data.emails) emails = JSON.parse(data.emails);
+    if (data.emails) {
+        const emailsStringJSON: string = JSON.stringify(data.emails);
+        emails = JSON.parse(emailsStringJSON);
+    };
     if (data.phones) phones = JSON.parse(data.phones);
 
     return await contactRepo.save({

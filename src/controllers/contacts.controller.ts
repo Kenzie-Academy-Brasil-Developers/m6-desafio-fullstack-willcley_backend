@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { Contact } from "../entities/index";
 import {
     createContactService,
-    readContactService,
     updateContactService,
     deleteContactService,
 } from "../services/contacts.service";
@@ -19,8 +18,8 @@ export const readContactController = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const contacts: Contact[] = await readContactService();
-    return res.status(200).json(contacts);
+    const { client } = res.locals;
+    return res.status(200).json(client.contacts);
 };
 
 export const updateContactController = async (

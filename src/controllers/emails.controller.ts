@@ -1,44 +1,48 @@
 import { Request, Response } from "express";
-import { Email } from "../entities/index";
 import {
     createEmailService,
-    readEmailService,
-    updateEmailService,
-    deleteEmailService,
+    deleteClientEmailService,
+    updateClientEmailService,
 } from "../services/emails.service";
 import { TReadEmail, TReturnEmail } from "../interfaces/emails.interfaces";
+import { readEmailSchema } from "../schemas/emails.schemas";
 
 export const createEmailController = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const email: TReturnEmail = await createEmailService(req.body);
+    const { clientId } = req.params;
+    const email: TReturnEmail = await createEmailService({...req.body, clientId});
     return res.status(201).json(email);
 };
 
-export const readEmailController = async (
+export const readClientEmailController = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const emails: TReadEmail = await readEmailService();
-    return res.status(200).json(emails);
+    const { client } = res.locals;
+    return res.status(200).json(client.emails);
 };
 
-export const updateEmailController = async (
-    req: Request,
-    res: Response
-): Promise<Response> => {
-    const { email } = res.locals;
-    const emailUpdated: TReturnEmail = await updateEmailService(req.body, email);
-
-    return res.status(200).json(emailUpdated);
-};
-
-export const deleteEmailController = async (
+export const updateClientEmailController = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
     const { email, client } = res.locals;
-    await deleteEmailService(email, client.id);
+    const emailUpdated: TReturnEmail = await updateClientEmailService(
+        req.body,
+        email,
+        client,
+    );
+
+    return res.status(200).json(emailUpdated);
+};
+
+export const deleteClientEmailController = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    const { email } = res.locals;
+    await deleteClientEmailService(email);
     return res.status(204).json();
 };
