@@ -39,7 +39,7 @@ export const verifyPermissions = (
 
     if (clientId != sub && client.id != sub) throw new AppError(
         "Insufficient permission",
-        403
+        401
     );
 
     return next();

@@ -11,13 +11,13 @@ export const loginService = async (
 ): Promise<TLoginReturn> => {
     const { email, password } = data;
     const clientEmail: Email | null = await emailRepo.findOneBy({email});
-    if (!clientEmail) throw new AppError("Invalid credentials", 401);
+    if (!clientEmail) throw new AppError("Invalid credentials.", 401);
 
     const comparePassword = await compare(
         password,
         clientEmail.password
     );
-    if (!comparePassword) throw new AppError("Invalid credentials", 401);
+    if (!comparePassword) throw new AppError("Invalid credentials.", 401);
 
     const client: Client | null = await clientRepo.findOneBy({
         emails: clientEmail

@@ -30,8 +30,8 @@ clientRouter.get(
 
 clientRouter.patch(
     "/:clientId",
-    validateBody(createClientSchema),
     verifyToken,
+    validateBody(createClientSchema),
     verifyClientExists,
     verifyPermissions,
     updateClientController,

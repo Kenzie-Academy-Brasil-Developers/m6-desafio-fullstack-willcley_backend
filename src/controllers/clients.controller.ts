@@ -33,7 +33,7 @@ export const createClientController = async (
         relations: { emails: true, contacts: true },
         
     });
-    if (!createdClient) throw new AppError("Client not found.", 404);
+    if (!createdClient) throw new AppError("Client created but not found.", 404);
 
     const clientReturn = clientReturnSchema.parse(createdClient);
     return res.status(201).json(clientReturn);

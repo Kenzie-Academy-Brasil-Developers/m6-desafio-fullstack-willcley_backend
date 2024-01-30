@@ -24,18 +24,3 @@ export const verifyClientExists = async (
 
     return next();
 };
-
-export const verifyClientEmailOwner = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-): Promise<void> => {
-    const { client, email } = res.locals;
-
-    if (email.clientId != client.id) throw new AppError(
-        "You can not update this email.",
-        401
-    );
-
-    return next();
-};

@@ -13,6 +13,7 @@ export const createContactSchema = contactSchema.omit({
     id: true,
     createdAt: true,
 });
+
 export const updateContactSchema = createContactSchema.omit({
     clientId: true,
 }).partial();

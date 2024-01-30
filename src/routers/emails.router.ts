@@ -12,12 +12,13 @@ import {
     verifyUniqueEmail
 } from "../middlewares/emails.middleware";
 import { createEmailSchema, updateEmailSchema } from "../schemas/emails.schemas";
-import { verifyClientEmailOwner, verifyClientExists } from "../middlewares/clients.middleware";
+import { verifyClientExists } from "../middlewares/clients.middleware";
 
 export const emailRouter: Router = Router();
 
 emailRouter.post(
     "/",
+    verifyToken,
     verifyClientExists,
     validateBody(createEmailSchema),
     verifyUniqueEmail,
@@ -33,22 +34,20 @@ emailRouter.get(
 
 emailRouter.patch(
     "/:emailId",
+    verifyToken,
     verifyClientExists,
     validateBody(updateEmailSchema),
-    verifyToken,
     verifyEmailExists,
     verifyPermissions,
-    verifyClientEmailOwner,
     updateClientEmailController,
 );
 
 emailRouter.delete(
     "/:emailId",
-    verifyClientExists,
     verifyToken,
+    verifyClientExists,
     verifyEmailExists,
     verifyPermissions,
-    verifyClientEmailOwner,
     verifyHasAnotherEmail,
     deleteClientEmailController,
 );

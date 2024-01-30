@@ -25,8 +25,8 @@ const clientSchema = z.object({
     fullname: z.string().max(50),
     createdAt: z.string(),
     phones: z.string(),
-    email: z.string(),
-    password: z.string(),
+    email: z.string().email().max(50),
+    password: z.string().max(120),
 });
 
 export const createClientSchema = clientSchema.omit({

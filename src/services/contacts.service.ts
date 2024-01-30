@@ -27,6 +27,7 @@ export const updateContactService = async (
     data: TUpdateContact,
     contact: Contact
 ): Promise<Contact> => {
+    let fullname: string = contact.fullname;
     let emails: JSON = contact.emails;
     let phones: JSON = contact.phones;
     if (data.emails) {
@@ -34,10 +35,11 @@ export const updateContactService = async (
         emails = JSON.parse(emailsStringJSON);
     };
     if (data.phones) phones = JSON.parse(data.phones);
+    if (data.fullname) fullname = data.fullname;
 
     return await contactRepo.save({
         ...contact,
-        ...data,
+        fullname,
         emails,
         phones
     });

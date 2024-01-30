@@ -4,15 +4,14 @@ import {
     deleteClientEmailService,
     updateClientEmailService,
 } from "../services/emails.service";
-import { TReadEmail, TReturnEmail } from "../interfaces/emails.interfaces";
-import { readEmailSchema } from "../schemas/emails.schemas";
+import { TReturnEmail } from "../interfaces/emails.interfaces";
 
 export const createEmailController = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const { clientId } = req.params;
-    const email: TReturnEmail = await createEmailService({...req.body, clientId});
+    const { client } = res.locals;
+    const email: TReturnEmail = await createEmailService({...req.body, client});
     return res.status(201).json(email);
 };
 

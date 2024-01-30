@@ -14,24 +14,24 @@ export const contactRouter: Router = Router();
 
 contactRouter.post(
     "/",
-    validateBody(createContactSchema),
     verifyToken,
+    validateBody(createContactSchema),
     verifyClientExists,
     createContactController,
 );
 
 contactRouter.get(
     "/clients/:clientId",
-    // verifyToken,
+    verifyToken,
     verifyClientExists,
-    // verifyPermissions,
+    verifyPermissions,
     readContactController,
 );
 
 contactRouter.patch(
     "/:contactId/clients/:clientId",
-    validateBody(updateContactSchema),
     verifyToken,
+    validateBody(updateContactSchema),
     verifyContactExists,
     verifyPermissions,
     updateContactController,
