@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createClientController, deleteClientController, readClientController, updateClientController } from "../controllers/clients.controller";
+import { createClientController, deleteClientController, getClientController, readClientController, updateClientController } from "../controllers/clients.controller";
 import { validateBody, verifyPermissions, verifyToken } from "../middlewares/globals.middleware";
 import { verifyUniqueEmail } from "../middlewares/emails.middleware";
 import { createClientAndEmailSchema, createClientSchema } from "../schemas/clients.schemas";
@@ -18,6 +18,14 @@ clientRouter.post(
 clientRouter.get(
     "/",
     readClientController
+);
+
+clientRouter.get(
+    "/:clientId",
+    verifyToken,
+    verifyClientExists,
+    verifyPermissions,
+    getClientController
 );
 
 clientRouter.patch(

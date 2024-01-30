@@ -17,6 +17,16 @@ export const readClientService = async (): Promise<Client[]> => {
     });
 };
 
+export const getClientService = async (clientId: string): Promise<Client> => {
+    const client: Client | null = await clientRepo.findOne({
+        where: { id: clientId },
+        relations: { emails: true, contacts: true },
+    });
+    if (!client) throw new AppError("Client not found.", 404);
+
+    return client;
+};
+
 export const updateClientService = async (
     data: TUpdateClient,
     client: Client

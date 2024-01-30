@@ -6,6 +6,7 @@ import {
     readClientService,
     updateClientService,
     deleteClientService,
+    getClientService,
 } from "../services/clients.service";
 import { createEmailService } from "../services/emails.service";
 import { clientRepo } from "../repositories";
@@ -24,7 +25,7 @@ export const createClientController = async (
     await createEmailService({
         email,
         password,
-        clientId: client.id,
+        client: client,
     });
 
     const createdClient: Client | null = await clientRepo.findOne({
@@ -46,6 +47,17 @@ export const readClientController = async (
     const clientsReturn = clientReadReturnSchema.parse(clients);
 
     return res.status(200).json(clientsReturn);
+};
+
+export const getClientController = async(
+    req: Request,
+    res: Response,
+): Promise<Response> => {
+    const { clientId } = req.params;
+    const client: Client = await getClientService(clientId);
+    const clientReturn = clientReturnSchema.parse(client);
+
+    return res.status(200).json(clientReturn);
 };
 
 export const updateClientController = async (
