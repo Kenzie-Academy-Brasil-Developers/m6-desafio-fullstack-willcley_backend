@@ -73,13 +73,13 @@ Execute as migrations com o comando:
 > - Pelo yarn:
 >
 > ```
-> yarn typeorm migration:run -d src/data-source.ts
+> yarn typeorm migration:run -- -d src/data-source.ts
 > ```
 >
 > - Pelo yarn:
 >
 > ```
-> npm run typeorm migration:run -d src/data-source.ts
+> npm run typeorm migration:run -- -d src/data-source.ts
 > ```
 
 ---
