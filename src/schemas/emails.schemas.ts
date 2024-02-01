@@ -20,3 +20,11 @@ export const loginSchema = emailSchema.pick({
     email: true,
     password: true,
 });
+
+export const sessionReturn = z.object({
+    token: z.string(),
+    client: z.object({
+        id: z.string(),
+        fullname: z.string().max(50)
+    }),
+});

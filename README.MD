@@ -162,7 +162,11 @@ Content-type: application/json
 
 ```json
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IndpbGwgbWVsbyIsImlhdCI6MTcwNjU2NDY0OCwiZXhwIjoxNzA2NTc5MDQ4LCJzdWIiOiJmZTBmMGYxOC04MjlkLTQzNDQtYjA3ZS0wNDMxNGVjMWI1YTMifQ.F63ZP0Gj_0Fb4e-L7hIwhj-0Ynh9vJ6g49AMiEJL9_0"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IndpbGwgbWVsbyIsImlhdCI6MTcwNjU2NDY0OCwiZXhwIjoxNzA2NTc5MDQ4LCJzdWIiOiJmZTBmMGYxOC04MjlkLTQzNDQtYjA3ZS0wNDMxNGVjMWI1YTMifQ.F63ZP0Gj_0Fb4e-L7hIwhj-0Ynh9vJ6g49AMiEJL9_0",
+    "client": {
+        "id": "fe0f0f18-829d-4344-b07e-04314ec1b5a3",
+        "fullname": "will"
+    }
 }
 ```
 
