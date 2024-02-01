@@ -5,6 +5,7 @@ import { Client, Email } from "../entities/index";
 import { TLogin, TLoginReturn } from "../interfaces/emails.interfaces";
 import { clientRepo, emailRepo } from "../repositories";
 import { sign } from "jsonwebtoken";
+import { sessionReturn } from "../schemas/emails.schemas";
 
 export const loginService = async (
     data: TLogin
@@ -30,5 +31,5 @@ export const loginService = async (
         { subject: client.id, expiresIn: process.env.EXPIRES_IN! }
     );
 
-    return { token };
+    return sessionReturn.parse({ token, client });
 };
