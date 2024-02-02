@@ -2,7 +2,7 @@ import { Router } from "express";
 import { createClientController, deleteClientController, getClientController, readClientController, updateClientController } from "../controllers/clients.controller";
 import { validateBody, verifyPermissions, verifyToken } from "../middlewares/globals.middleware";
 import { verifyUniqueEmail } from "../middlewares/emails.middleware";
-import { createClientAndEmailSchema, createClientSchema } from "../schemas/clients.schemas";
+import { createClientAndEmailSchema, createClientSchema, updateClientSchema } from "../schemas/clients.schemas";
 import { emailRouter } from "./emails.router";
 import { verifyClientExists } from "../middlewares/clients.middleware";
 
@@ -31,7 +31,7 @@ clientRouter.get(
 clientRouter.patch(
     "/:clientId",
     verifyToken,
-    validateBody(createClientSchema),
+    validateBody(updateClientSchema),
     verifyClientExists,
     verifyPermissions,
     updateClientController,
