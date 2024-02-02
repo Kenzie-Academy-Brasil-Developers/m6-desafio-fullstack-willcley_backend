@@ -35,6 +35,7 @@ export const createClientSchema = clientSchema.omit({
     email: true,
     password: true,
 });
+export const updateClientSchema = createClientSchema.partial();
 
 export const createClientAndEmailSchema = clientSchema.omit({
     id: true,
