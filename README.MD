@@ -82,6 +82,22 @@ Execute as migrations com o comando:
 > npm run typeorm migration:run -- -d src/data-source.ts
 > ```
 
+### 3.4. Rodar Projeto
+
+Rode o projeto com o comando:
+
+> - Pelo yarn:
+>
+> ```shell
+> yarn run dev
+> ```
+>
+> - Pelo npm:
+>
+> ```shell
+> npm run dev
+> ```
+
 ---
 
 
