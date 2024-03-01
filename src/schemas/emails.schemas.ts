@@ -12,7 +12,7 @@ export const emailSchema = z.object({
 
 export const returnEmailSchema = emailSchema.omit({ password: true });
 
-export const createEmailSchema = emailSchema.omit({ id: true, client: true });
+export const createEmailSchema = emailSchema.omit({ id: true });
 export const readEmailSchema = returnEmailSchema.array();
 export const updateEmailSchema = emailSchema.pick({ password: true });
 
