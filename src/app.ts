@@ -13,7 +13,10 @@ const corsOptions = {
 
 export const app: Application = express();
 app.use(express.json());
-app.use(cors(corsOptions))
+app.use(cors(
+    corsOptions,
+    origin="https://gerenciador-de-contatos-nu.vercel.app",
+))
 
 app.use("/", routers);
 
